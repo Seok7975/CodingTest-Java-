@@ -19,6 +19,7 @@ N개의 수 A1, A2, ..., An이 주어졌을 때 연속된 부분의 합이 M으�
 예제출력
 7
 */
+
 package prefixSum;
 
 import java.io.BufferedReader;
