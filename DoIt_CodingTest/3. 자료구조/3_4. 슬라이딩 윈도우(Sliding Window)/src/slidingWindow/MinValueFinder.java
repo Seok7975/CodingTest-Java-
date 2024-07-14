@@ -73,8 +73,8 @@ public class MinValueFinder {
 			// 현재 범위의 최솟값을 출력
 			bw.write(mydeque.getFirst().value + " ");
 		}
-		
-		// 출력 버퍼를 비우고 닫음
+
+		// 출력 버퍼를 비우고 닫음.
 		bw.flush();
 		bw.close();
 		
