@@ -36,8 +36,11 @@ NGE(1) = -1, NGE(2) = 8, NGE(3) = 8, NGE(4) = -1이다.
 package stackAndQueue;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class FindingNextLargerElement {
@@ -46,13 +49,35 @@ public class FindingNextLargerElement {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int N = Integer.parseInt(st.nextToken()); // 수열의 항 갯수
 		int[] A = new int[N]; // 수열
-		
+		int[] answer = new int[N];	// 정답배열
 		st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
 			A[i] = Integer.parseInt(st.nextToken());
-			System.out.println(A[i]);
+			System.out.print(A[i] + " ");
+		}
+		System.out.println();
+		
+		Stack<Integer> myStack = new Stack<>();
+		myStack.push(0); // 첫 번째 원소부터 비교를 시작하기 위해서 0을 미리 넣음, Stack 0, A[0]
+		//첫 번째 원소의 인덱스를 스택에 넣고, 그 이후의 원소들과 비교를 시작
+		for(int i =1; i < N; i++) {
+			while(!myStack.isEmpty() && A[myStack.peek()] < A[i]) {
+				answer[myStack.pop()] = A[i]; // 인덱스를 제거하면서 A[i]가 다음 큰 요소임을 기록하게 함
+			}
+			myStack.push(i);
 		}
 		
+		while(!myStack.empty()) {
+			answer[myStack.pop()] = -1;
+		}
+		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		for (int i = 0 ; i < N ; i++) {
+			bw.write(answer[i] + " ");
+			
+		}
+		bw.write("\n");
+		bw.flush();
 		/*
 		 * int N = Integer.parseInt(br.readLine()); // 수열의 갯수 int[] A = new int[N]; //
 		 * 수열 String[] str = br.readLine().split(" ");
